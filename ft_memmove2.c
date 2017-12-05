@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkoekemo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mlamarre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/22 22:00:59 by lkoekemo          #+#    #+#             */
-/*   Updated: 2016/11/01 11:35:28 by lkoekemo         ###   ########.fr       */
+/*   Created: 2016/10/30 15:59:20 by mlamarre          #+#    #+#             */
+/*   Updated: 2016/11/11 09:59:56 by mlamarre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+void	*ft_memmove(void *s1, const void *s2, size_t n)
 {
-	unsigned int	i;
-	char			*new;
+	size_t		i;
 
 	i = 0;
-	if (!s || !f)
-		return (NULL);
-	new = ft_strdup(s);
-	if (new == NULL)
-		return (NULL);
-	while (s[i])
+	if (s2 < s1)
 	{
-		new[i] = f(i, s[i]);
-		i++;
+		i = n;
+		while (i > 0)
+		{
+			i--;
+			((char *)s1)[i] = ((char *)s2)[i];
+		}
 	}
-	new[i] = '\0';
-	return (new);
+	else
+	{
+		while (i < n)
+		{
+			((char *)s1)[i] = ((char *)s2)[i];
+			i++;
+		}
+	}
+	return (s1);
 }
